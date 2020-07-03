@@ -22,4 +22,4 @@ def solow(K_0, L_0, a, b, d, g, s, duration):
 
 
 if __name__ == "__main__":
-    pass
+    solow(1,1,1,.5,.1,.05,.15,10)
