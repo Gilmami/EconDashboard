@@ -10,6 +10,11 @@ class model:
         self.l = l
         self.a = a
         self.t = t
+#         self.vars = list()
+#      def listvars(self, model):
+#          vars = [i for i in dir(model) if not callable(i) if not i.startswith("__") if not "vars"]
+#          return vars
+#  j=model(1,2,3,4,5,6)
 
 
 def solow(k_0=1, l_0=1, a_0=1, alpha=0.5, d=0.04, g=0.03, n=0.02, s=0.1, duration=100):
