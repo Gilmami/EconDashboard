@@ -10,11 +10,7 @@ class model:
         self.l = l
         self.a = a
         self.t = t
-#         self.vars = list()
-#      def listvars(self, model):
-#          vars = [i for i in dir(model) if not callable(i) if not i.startswith("__") if not "vars"]
-#          return vars
-#  j=model(1,2,3,4,5,6)
+        self.vars = [i for i in dir(self) if not callable(i) if not i.startswith("__")]
 
 
 def solow(k_0=1, l_0=1, a_0=1, alpha=0.5, d=0.04, g=0.03, n=0.02, s=0.1, duration=100):
@@ -47,8 +43,6 @@ def solow(k_0=1, l_0=1, a_0=1, alpha=0.5, d=0.04, g=0.03, n=0.02, s=0.1, duratio
     return model(k0points, k1points, ypoints, lpoints, apoints, t)
 # I don't think this is right, it's giving me some messed up graphs. I'll make sure my formulation is
 # correct next time I work on this.
-# consider adding a variable that merely lists the parameters of the model, maybe params?
-# How do I even do that? It'll make coding everything else easier though. :|
 
 if __name__ == "__main__":
     solow()
