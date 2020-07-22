@@ -22,8 +22,8 @@ def update(val):
     updmodel = models.solow(k_0=k0_slide.get(), l_0=l0_slide.get(), a_0=a0_slide.get(),
                             alpha=alpha_slide.get(), d=delta_slide.get(), g=g_slide.get(),
                             n=n_slide.get(), s=s_slide.get())
-    ax.cla()
-    ax.plot(updmodel.k0, updmodel.k1, color="#C41E3A")
+    axes.cla()
+    axes.plot(updmodel.y, updmodel.k1, color="#C41E3A")
     canvas.draw_idle()
 
 # set up sliders for all the parameter values of the solow model.
@@ -61,7 +61,9 @@ s_slide.grid(column=8, row=1)
 
 # initialize and create the graph for the model with parameter values (ideally) set by sliders
 figure = plt.Figure(figsize=(6, 5), dpi=100)
-ax = figure.add_subplot(1, 1, 1)
+axes = figure.add_subplot(1, 1, 1)
+axes.set_xlim([1,500])
+axes.set_ylim([1,500])
 
 canvas = FigureCanvasTkAgg(figure, root)
 canvas.get_tk_widget().grid(row=0, column=0, columnspan=8)
@@ -72,8 +74,13 @@ canvas.get_tk_widget().grid(row=0, column=0, columnspan=8)
 usrmodel = models.solow(k_0=k0_slide.get(), l_0=l0_slide.get(), a_0=a0_slide.get(),
                         alpha=alpha_slide.get(), d=delta_slide.get(), g=g_slide.get(),
                         n=n_slide.get(), s=s_slide.get())
+dep_line = list()
+for i in usrmodel.k0:
+    dep_k0 = (n_slide.get() + delta_slide.get()) * i
+    dep_line.append(dep_k0)
 
-ax.plot(usrmodel.k0, usrmodel.k1, color="#C41E3A")
+axes.plot(usrmodel.k0, usrmodel.y, color="#C41E3A")
+axes.plot(usrmodel.k0, dep_line)
 
 
 root.mainloop()
