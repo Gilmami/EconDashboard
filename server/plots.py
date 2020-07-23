@@ -13,4 +13,6 @@ for i in range(0, len(points.k0)):
     line.append(i)
 fig = plt.figure(0)
 fig = plt.plot(points.k0, line)
+fig = plt.plot()
+
 plt.show()

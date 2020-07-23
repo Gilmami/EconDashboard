@@ -1,6 +1,4 @@
-# Got a layout that makes sense. will need to do some tweaking, but better than nothing.
-# Next to figure out how to make sliders interact with params. I'll try just putting something
-# like, slider.get in for each argument of param in the graph, see what happens tomorrow.
+# now to get into proper formulation of the model to actually get the correct graph.
 
 import os
 import sys
@@ -22,11 +20,22 @@ def update(val):
     updmodel = models.solow(k_0=k0_slide.get(), l_0=l0_slide.get(), a_0=a0_slide.get(),
                             alpha=alpha_slide.get(), d=delta_slide.get(), g=g_slide.get(),
                             n=n_slide.get(), s=s_slide.get())
+    dep_line = list()
+    for i in updmodel.k0:
+        dep_k0 = (n_slide.get() + delta_slide.get()) * i
+        dep_line.append(dep_k0)
+
+
     axes.cla()
-    axes.plot(updmodel.y, updmodel.k1, color="#C41E3A")
+    axes.plot(updmodel.t, updmodel.y, color="r")
+    axes.plot(updmodel.t, dep_line, color="b")
+    # axes.set_xlim([1, 500])
+    # axes.set_ylim([1, 500])
     canvas.draw_idle()
 
 # set up sliders for all the parameter values of the solow model.
+
+
 k0_slide = Scale(master=root, from_=1000, to=0, label="K0".translate(subscript), command=update)
 k0_slide.set(1)
 k0_slide.grid(column=0, row=1)
@@ -62,8 +71,7 @@ s_slide.grid(column=8, row=1)
 # initialize and create the graph for the model with parameter values (ideally) set by sliders
 figure = plt.Figure(figsize=(6, 5), dpi=100)
 axes = figure.add_subplot(1, 1, 1)
-axes.set_xlim([1,500])
-axes.set_ylim([1,500])
+
 
 canvas = FigureCanvasTkAgg(figure, root)
 canvas.get_tk_widget().grid(row=0, column=0, columnspan=8)
@@ -74,13 +82,5 @@ canvas.get_tk_widget().grid(row=0, column=0, columnspan=8)
 usrmodel = models.solow(k_0=k0_slide.get(), l_0=l0_slide.get(), a_0=a0_slide.get(),
                         alpha=alpha_slide.get(), d=delta_slide.get(), g=g_slide.get(),
                         n=n_slide.get(), s=s_slide.get())
-dep_line = list()
-for i in usrmodel.k0:
-    dep_k0 = (n_slide.get() + delta_slide.get()) * i
-    dep_line.append(dep_k0)
-
-axes.plot(usrmodel.k0, usrmodel.y, color="#C41E3A")
-axes.plot(usrmodel.k0, dep_line)
-
 
 root.mainloop()
