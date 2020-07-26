@@ -1,2 +1,2 @@
 # EconDashboard
-Economic Model visualization dashboard
+Economic Model visualization dashboard(unfinished) I built this to play around with tkinter, get a feel for how to make graphs dynamic, and get my toes into the world of python programming. I'm very pleased with my progress since I started it, and I feel i have a more solid understanding of python as a language. Unfortunately, my shortcoming is in understanding the Solow Growth model that I was trying to plot. 
