@@ -8,11 +8,13 @@ from models import solow
 
 points = solow()
 
-line = list()
+difflist = list()
 for i in range(0, len(points.k0)):
-    line.append(i)
+    diff = points.k0[i] - points.k1[i]
+    difflist.append(diff)
+
 fig = plt.figure(0)
-fig = plt.plot(points.k0, line)
+fig = plt.plot(points.t, points.k1)
 fig = plt.plot()
 
 plt.show()
